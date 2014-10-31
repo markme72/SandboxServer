@@ -21,7 +21,7 @@ public class SandboxServer {
 		while (true) {
 			try {
 				// a socket opened on the specified port
-				ServerSocket aListeningSocket = new ServerSocket(9291);
+				ServerSocket aListeningSocket = new ServerSocket(9292);
 				// wait for a connection
 				System.out.println("Waiting for client connection request.");
 				Socket clientSocket = aListeningSocket.accept();
@@ -65,18 +65,13 @@ public class SandboxServer {
 		Query singleUserQuery = session.createQuery("select u from UserBean as u where u.uname='" + aUser.getUname() + "'");
 		UserBean queriedUser = (UserBean)singleUserQuery.uniqueResult();
 		
-		if (queriedUser == null) {
+		if ((queriedUser == null) || (!queriedUser.getPword().equals(aUser.getPword()))) {
 			PrintWriter out = new PrintWriter(clientSocket.getOutputStream(), true);
-	        out.println("User does not exist");
+	        out.println("Incorrect credentials");
 	        session.close();
 			return;
 		}
-		else if (!queriedUser.getPword().equals(aUser.getPword())) {
-			PrintWriter out = new PrintWriter(clientSocket.getOutputStream(), true);
-	        out.println("Incorrect password");
-	        session.close();
-			return;
-		}
+
 		PrintWriter out = new PrintWriter(clientSocket.getOutputStream(), true);
 		out.println("Successfully logged in!");
 		
