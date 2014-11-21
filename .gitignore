@@ -4,14 +4,12 @@
 .settings/org.eclipse.jdt.core.prefs
 bin/.classpath
 bin/.project
-bin/HibernateUtilSingleton.class
 bin/META-INF/MANIFEST.MF
 bin/META-INF/REFACTORINGS.XML
-bin/SandboxServer.class
-bin/UserBean.class
 src/.classpath
 src/.project
-src/CommunicationBean.class
 src/META-INF/MANIFEST.MF
 src/META-INF/REFACTORINGS.XML
-src/SimpleServer.class
+*.class
+/src/org/quickconnectfamily/
+bin/org/quickconnectfamily/
